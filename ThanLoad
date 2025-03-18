@@ -136,7 +136,7 @@ Fisch = true;
 else
 game:Shutdown()
 end;
-if game.Workspace.zones.fishing:FindFirstChild("Isonade") then
+if game.Workspace.zones.fishing:FindFirstChild("Orcas Pool") then
     if Fisch then
  
     for i, v in pairs(game.Players:GetPlayers()) do
@@ -145,6 +145,8 @@ if game.Workspace.zones.fishing:FindFirstChild("Isonade") then
  
     if game.Workspace.zones.fishing:FindFirstChild("Orcas Pool") then
         OrcasMessage = '```Orcas Pool is spawing : 🟢```'
+    else
+	OrcasMessage = '```Orcas Pool is spawing : :x:```'
     end
     JoinServer = 'game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId,' ..
         '\'' .. tostring(game.JobId) .. '\'' .. ')'
