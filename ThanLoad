@@ -301,66 +301,60 @@ end
 end
 
 local id = game.PlaceId
-if id == 16732694052 then
-    AuroraCheck = true
-else
+if id ~= 16732694052 then
     game:Shutdown()
+    return
 end
 
-if AuroraCheck then
-    -- Cek apakah Aurora Borealis ada di lokasi yang benar
-    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local AuroraExists = ReplicatedStorage:FindFirstChild("active") 
+    and ReplicatedStorage.active:FindFirstChild("constant") 
+    and ReplicatedStorage.active.constant:FindFirstChild("Aurora Borealis")
 
-    if ReplicatedStorage:FindFirstChild("active") and 
-       ReplicatedStorage.active:FindFirstChild("constant") and 
-       ReplicatedStorage.active.constant:FindFirstChild("Aurora Borealis") then
-        
-        -- Jika Aurora Borealis ditemukan, lanjutkan mengirim webhook
-        local AuroraMessage = "```Aurora Borealis is spawning! 🌌```"
+if AuroraExists then
+    local AuroraMessage = "```Aurora Borealis is spawning! 🌌```"
+    local TotalPlayers = #game.Players:GetPlayers()
+    local JoinServer = 'game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId,' ..
+        '\'' .. tostring(game.JobId) .. '\'' .. ')'
 
-        -- Jumlah pemain di server
-        local TotalPlayers = #game.Players:GetPlayers()
-
-        -- Generate Join Server Script
-        local JoinServer = 'game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId,' ..
-            '\'' .. tostring(game.JobId) .. '\'' .. ')'
-
-        local url = "https://discord.com/api/webhooks/1351363551440408656/eiPDdUL3ZRZ9rUZrCiRI4L7BR3fGOiz2wA04OEzxULxJprY7OCGfp-1f1HEYL0IWzLh1"
-        local data = {
-            ["username"] = 'Aurora Finder || Thanhub',
-            ['content'] = '',
-            ["avatar_url"] = "https://media.discordapp.net/attachments/1342846567094161488/1346724283753304084/Gambar_WhatsApp_2025-02-18_pukul_06.35.37_182c3226.jpg?ex=67c93a3a&is=67c7e8ba&hm=a345e419c89c574e0f32f5ec36919cb1800eae29aa213afa5d64524a1a37287f&=&format=webp",
-            ["embeds"] = {
-                {
-                    ["description"] = "**__Aurora Borealis Finder__**",
-                    ["color"] = tonumber(0x00FF00), -- Warna hijau
-                    ["type"] = "rich",
-                    ["fields"] = {
-                        {
-                            ["name"] = "[🌌] Aurora Borealis Status",
-                            ["value"] = AuroraMessage
-                        },
-                        {
-                            ["name"] = "[👥] Total Players",
-                            ["value"] = '```' .. tostring(TotalPlayers) .. '```',
-                            ["inline"] = true
-                        },
-                        {
-                            ["name"] = "[📁] Join Server",
-                            ["value"] = '```' .. JoinServer .. '```',
-                        }
+    local url = "https://discord.com/api/webhooks/1351363551440408656/eiPDdUL3ZRZ9rUZrCiRI4L7BR3fGOiz2wA04OEzxULxJprY7OCGfp-1f1HEYL0IWzLh1"
+    local data = {
+        ["username"] = 'Aurora Finder || Thanhub',
+        ["content"] = '',
+        ["avatar_url"] = "https://media.discordapp.net/attachments/1342846567094161488/1346724283753304084/Gambar_WhatsApp_2025-02-18_pukul_06.35.37_182c3226.jpg?ex=67c93a3a&is=67c7e8ba&hm=a345e419c89c574e0f32f5ec36919cb1800eae29aa213afa5d64524a1a37287f&=&format=webp",
+        ["embeds"] = {
+            {
+                ["description"] = "**__Aurora Borealis Finder__**",
+                ["color"] = tonumber(0x00FF00),
+                ["type"] = "rich",
+                ["fields"] = {
+                    {
+                        ["name"] = "[🌌] Aurora Borealis Status",
+                        ["value"] = AuroraMessage
                     },
-                    ["footer"] = {
-                        ["text"] = "Webhook Created By ThanHub WEBHOOK",
+                    {
+                        ["name"] = "[👥] Total Players",
+                        ["value"] = '```' .. tostring(TotalPlayers) .. '```',
+                        ["inline"] = true
                     },
-                    ["timestamp"] = DateTime.now():ToIsoDate(),
-                }
-            },
-        }
+                    {
+                        ["name"] = "[📁] Join Server",
+                        ["value"] = '```' .. JoinServer .. '```',
+                    }
+                },
+                ["footer"] = {
+                    ["text"] = "Webhook Created By ThanHub WEBHOOK",
+                },
+                ["timestamp"] = DateTime.now():ToIsoDate(),
+            }
+        },
+    }
 
-        local newdata = game:GetService("HttpService"):JSONEncode(data)
-        local headers = { ["content-type"] = "application/json" }
-        request = http_request or request or HttpPost or syn.request
+    local newdata = game:GetService("HttpService"):JSONEncode(data)
+    local headers = { ["content-type"] = "application/json" }
+    request = http_request or request or HttpPost or syn.request
+
+    if request then
         local abcdef = { Url = url, Body = newdata, Method = "POST", Headers = headers }
         request(abcdef)
     end
