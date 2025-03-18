@@ -202,26 +202,39 @@ else
     game:Shutdown()
 end
 
-local startTime = os.clock() -- Waktu server dimulai
-
 if Fisch then
     for i, v in pairs(game.Players:GetPlayers()) do
         PlayersMin = i
     end
 
-    -- Hitung UpTime
-    local elapsedTime = os.clock() - startTime
+-- Cek apakah ReplicatedStorage > world > uptime ada
+local UpTimeMessage = "Unknown"
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+if ReplicatedStorage:FindFirstChild("world") and ReplicatedStorage.world:FindFirstChild("uptime") then
+    local elapsedTime = ReplicatedStorage.world.uptime.Value
     local hours = math.floor(elapsedTime / 3600)
     local minutes = math.floor((elapsedTime % 3600) / 60)
     local seconds = math.floor(elapsedTime % 60)
-    local UpTimeMessage = string.format("```%02d:%02d:%02d```", hours, minutes, seconds)
+    UpTimeMessage = string.format("```%02d:%02d:%02d```", hours, minutes, seconds)
+end
 
     -- Total Players di Server
     local TotalPlayers = #game.Players:GetPlayers()
 
-    -- Game Version
-    local GameVersion = game.PlaceVersion
+-- Game Version dari playerstats
+local GameVersion = "Unknown"
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
+if ReplicatedStorage:FindFirstChild("playerstats") then
+    local playerStats = ReplicatedStorage.playerstats:FindFirstChild(game.Players.LocalPlayer.Name)
+    if playerStats and playerStats:FindFirstChild("Stats") then
+        local stats = playerStats.Stats
+        if stats:FindFirstChild("lastversion") then
+            GameVersion = stats.lastversion.Value
+        end
+    end
+end
     -- Ambil Cycle dari ReplicatedStorage
     local CycleStatus = "Unknown" -- Default jika tidak ditemukan
     local ReplicatedStorage = game:GetService("ReplicatedStorage")
