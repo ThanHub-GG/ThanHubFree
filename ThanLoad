@@ -309,7 +309,6 @@ end
 
 if AuroraCheck then
     -- Cek apakah Aurora Borealis ada di lokasi yang benar
-    local AuroraMessage = "```Aurora Borealis isn't spawned ❌```"
     local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
     if ReplicatedStorage:FindFirstChild("active") and 
