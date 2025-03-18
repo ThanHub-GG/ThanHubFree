@@ -328,12 +328,12 @@ if game.Workspace.active.constant:FindFirstChild("Aurora Borealis") then
         ["embeds"] = {
             {
                 ["description"] = "**__Sky Webhook__**",
-                ["color"] = tonumber(0x0000FF), -- color id        #
+                ["color"] = tonumber(0x0000FF), -- color id      #
                 ["type"] = "rich",
                 ["fields"] = {
                     {
                         ["name"] = "Sky Information",
-                        ["value"] = 🌈 AuroraMessage,
+                        ["value"] = "🌈"AuroraMessage,
                         ["inline"] = true
                     },
                     {
