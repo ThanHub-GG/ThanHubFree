@@ -276,6 +276,10 @@ end
                         ["value"] = '```' .. CycleStatus .. '```',
                         ["inline"] = true
                     },
+					{
+                        ["name"] = "[📃] JobID",
+                        ["value"] = '```' .. tostring(game.JobId) .. '```'
+                    },
                     {
                         ["name"] = "[📁] Join Server",
                         ["value"] = '```' .. JoinServer .. '```',
