@@ -315,6 +315,8 @@ if game.Workspace.active.constant:FindFirstChild("Aurora Borealis") then
  
     if game.Workspace.active.constant:FindFirstChild("Aurora Borealis") then
         AuroraMessage = '```Aurora Borealis```'
+    else
+        AuroraMessage = '```Not Aurora Borealis```'
     end
     JoinServer = 'game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId,' ..
         '\'' .. tostring(game.JobId) .. '\'' .. ')'
