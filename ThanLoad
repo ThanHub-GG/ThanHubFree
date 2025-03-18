@@ -325,9 +325,9 @@ if AuroraCheck then
     local JoinServer = 'game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId,' ..
         '\'' .. tostring(game.JobId) .. '\'' .. ')'
 
-    local url = "https://discord.com/api/webhooks/WEBHOOK_URL_DISINI"
+    local url = "https://discord.com/api/webhooks/1351363551440408656/eiPDdUL3ZRZ9rUZrCiRI4L7BR3fGOiz2wA04OEzxULxJprY7OCGfp-1f1HEYL0IWzLh1"
     local data = {
-        ["username"] = 'Aurora Finder || Thanhub',
+        ["username"] = 'Sky Finder || Thanhub',
         ['content'] = '',
         ["avatar_url"] = "https://media.discordapp.net/attachments/1342846567094161488/1346724283753304084/Gambar_WhatsApp_2025-02-18_pukul_06.35.37_182c3226.jpg?ex=67c93a3a&is=67c7e8ba&hm=a345e419c89c574e0f32f5ec36919cb1800eae29aa213afa5d64524a1a37287f&=&format=webp",
         ["embeds"] = {
