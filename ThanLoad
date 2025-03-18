@@ -276,7 +276,76 @@ end
                         ["value"] = '```' .. CycleStatus .. '```',
                         ["inline"] = true
                     },
-					{
+		    {
+                        ["name"] = "[📃] JobID",
+                        ["value"] = '```' .. tostring(game.JobId) .. '```'
+                    },
+                    {
+                        ["name"] = "[📁] Join Server",
+                        ["value"] = '```' .. JoinServer .. '```',
+                    }
+                },
+                ["footer"] = {
+                    ["text"] = "Webhook Created By ThanHub WEBHOOK",
+                },
+                ["timestamp"] = DateTime.now():ToIsoDate(),
+            }
+        },
+    }
+
+    local newdata = game:GetService("HttpService"):JSONEncode(data)
+    local headers = { ["content-type"] = "application/json" }
+    request = http_request or request or HttpPost or syn.request
+    local abcdef = { Url = url, Body = newdata, Method = "POST", Headers = headers }
+    request(abcdef)
+end
+
+local id = game.PlaceId
+if id == 16732694052 then
+    AuroraCheck = true
+else
+    game:Shutdown()
+end
+
+if AuroraCheck then
+    -- Cek apakah Aurora Borealis ada di lokasi yang benar
+    local AuroraMessage = "```Aurora Borealis isn't spawned ❌```"
+    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+    if ReplicatedStorage:FindFirstChild("active") and 
+       ReplicatedStorage.active:FindFirstChild("constant") and 
+       ReplicatedStorage.active.constant:FindFirstChild("Aurora Borealis") then
+        AuroraMessage = "```Aurora Borealis is spawning! 🌌✅```"
+    end
+
+    -- Jumlah pemain di server
+    local TotalPlayers = #game.Players:GetPlayers()
+
+    -- Generate Join Server Script
+    local JoinServer = 'game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId,' ..
+        '\'' .. tostring(game.JobId) .. '\'' .. ')'
+
+    local url = "https://discord.com/api/webhooks/WEBHOOK_URL_DISINI"
+    local data = {
+        ["username"] = 'Aurora Finder || Thanhub',
+        ['content'] = '',
+        ["avatar_url"] = "https://media.discordapp.net/attachments/1342846567094161488/1346724283753304084/Gambar_WhatsApp_2025-02-18_pukul_06.35.37_182c3226.jpg?ex=67c93a3a&is=67c7e8ba&hm=a345e419c89c574e0f32f5ec36919cb1800eae29aa213afa5d64524a1a37287f&=&format=webp",
+        ["embeds"] = {
+            {
+                ["description"] = "**__Aurora Borealis Finder__**",
+                ["color"] = tonumber(0x00FF00), -- Warna hijau
+                ["type"] = "rich",
+                ["fields"] = {
+                    {
+                        ["name"] = "[🌌] Aurora Borealis Status",
+                        ["value"] = AuroraMessage
+                    },
+                    {
+                        ["name"] = "[👥] Total Players",
+                        ["value"] = '```' .. tostring(TotalPlayers) .. '```',
+                        ["inline"] = true
+                    },
+		    {
                         ["name"] = "[📃] JobID",
                         ["value"] = '```' .. tostring(game.JobId) .. '```'
                     },
